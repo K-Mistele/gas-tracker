@@ -1,0 +1,293 @@
+<!--
+
+=========================================================
+* Volt Free - Bootstrap 5 Dashboard
+=========================================================
+
+* Product Page: https://themesberg.com/product/admin-dashboard/volt-bootstrap-5-dashboard
+* Copyright 2021 Themesberg (https://www.themesberg.com)
+* License (https://themesberg.com/licensing)
+
+* Designed and coded by https://themesberg.com
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. Please contact us to request a removal.
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <!-- Primary Meta Tags -->
+  <title>Ethereum Gas Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="title" content="Ethereum Gas Tracker">
+  <meta name="author" content="Kyle Mistele">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon/favicon-16x16.png">
+
+  <!-- Volt CSS -->
+  <link type="text/css" href="./css/volt.css" rel="stylesheet">
+
+  <!-- Script libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="assets/js/notifications.js"></script>
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/navigation.js"></script>
+
+</head>
+
+<body>
+
+<!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
+
+
+<nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
+  <a class="navbar-brand me-lg-5" href="#">
+    <img class="navbar-brand-dark" src="./assets/img/icons/gas.png" alt="Volt logo" /> <img class="navbar-brand-light" src="./assets/img/icons/gas.png" alt="Volt logo" />
+  </a>
+  <div class="d-flex align-items-center">
+    <button class="navbar-toggler d-lg-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+
+<nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>
+  <div class="sidebar-inner px-4 pt-3">
+    <div class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
+      <div class="d-flex align-items-center">
+        <div class="avatar-lg me-4">
+          <img src="./assets/img/team/profile-picture-3.jpg" class="card-img-top rounded-circle border-white"
+               alt="Bonnie Green">
+        </div>
+        <div class="d-block">
+          <h2 class="h5 mb-3">Hi, Jane</h2>
+          <a href="#" class="btn btn-secondary btn-sm d-inline-flex align-items-center">
+            <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+            Sign Out
+          </a>
+        </div>
+      </div>
+      <div class="collapse-close d-md-none">
+        <a href="#" data-bs-toggle="collapse"
+           data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="true"
+           aria-label="Toggle navigation">
+          <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </a>
+      </div>
+    </div>
+    <ul class="nav flex-column pt-3 pt-md-0">
+      <li class="nav-item">
+        <a href="#" class="nav-link d-flex align-items-center">
+          <span class="sidebar-icon">
+            <img src="./assets/img/icons/gas.png" height="20" width="20" alt="Volt Logo">
+          </span>
+          <span class="mt-1 ms-1 sidebar-text">ETH Gas tracker</span>
+        </a>
+      </li>
+      <li class="nav-item  active ">
+        <a href="javascript:navigate('statistics')" class="nav-link sidebar-tab" id="statistics-tab">
+          <span class="sidebar-icon">
+            <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
+          </span>
+          <span class="sidebar-text" >Statistics</span>
+        </a>
+      </li>
+      <li class="nav-item  active ">
+        <a href="javascript:navigate('notifications')" class="nav-link sidebar-tab" id="notifications-tab">
+          <span class="sidebar-icon">
+<svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path><path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"></path></svg>          </span>
+          <span class="sidebar-text" >Notifications</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<main class="content">
+
+  <div class="py-2">
+
+  </div>
+  <div class="row" id="statistics-page">
+    <!-- chart -->
+    <div class="col-12 mb-4">
+      <div class="card  border-0 shadow">
+        <div class="card-body p-2">
+          <canvas id="gasChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- slow gas -->
+    <div class="col-12 col-sm-6 col-xl-3 mb-4">
+      <div class="card border-0 shadow">
+        <div class="card-body">
+          <div class="row d-block d-xl-flex align-items-center">
+            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+              <div class="icon-shape icon-shape-primary rounded me-4 me-sm-0">
+                <img class="navbar-brand-dark" src="./assets/img/icons/gas.png" alt="Volt logo" />              </div>
+              <div class="d-sm-none">
+                <h2 class="h5">Slow Gas Price</h2>
+                <h3 class="fw-extrabold mb-1" style="color:#C52233!important"><span class="slowGas">XXX</span> &nbsp;gwei</h3>
+              </div>
+            </div>
+            <div class="col-12 col-xl-7 px-xl-0">
+              <div class="d-none d-sm-block">
+                <h2 class="h6 text-gray-400 mb-0">Slow Gas Price</h2>
+                <h3 class="fw-extrabold mb-2" style="color:#C52233!important"><span class="slowGas">XXX</span> &nbsp;gwei</h3>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- moderate gas -->
+    <div class="col-12 col-sm-6 col-xl-3 mb-4">
+      <div class="card border-0 shadow">
+        <div class="card-body">
+          <div class="row d-block d-xl-flex align-items-center">
+            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+              <div class="icon-shape icon-shape-primary rounded me-4 me-sm-0">
+                <img class="navbar-brand-dark" src="./assets/img/icons/gas.png" alt="Volt logo" />          </div>
+              <div class="d-sm-none">
+                <h2 class="h5">Moderate Gas Price</h2>
+                <h3 class="fw-extrabold mb-1" style="color:#256EFF!important"><span class="moderateGas">YYY</span> &nbsp;gwei</h3>
+              </div>
+            </div>
+            <div class="col-12 col-xl-7 px-xl-0">
+              <div class="d-none d-sm-block">
+                <h2 class="h6 text-gray-400 mb-0">Moderate Gas Price</h2>
+                <h3 class="fw-extrabold mb-2" style="color:#256EFF!important"><span class="moderateGas">YYY</span> &nbsp;gwei</h3>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- fast gas -->
+    <div class="col-12 col-sm-6 col-xl-3 mb-4">
+      <div class="card border-0 shadow">
+        <div class="card-body">
+          <div class="row d-block d-xl-flex align-items-center">
+            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+              <div class="icon-shape icon-shape-primary rounded me-4 me-sm-0">
+                <img class="navbar-brand-dark" src="./assets/img/icons/gas.png" alt="Volt logo" />              </div>
+              <div class="d-sm-none">
+                <h2 class="h5">Fast Gas Price</h2>
+                <h3 class="fw-extrabold mb-1" style="color:#3BC14A"><span class="fastGas">ZZZ</span>&nbsp;gwei</h3>
+              </div>
+            </div>
+            <div class="col-12 col-xl-7 px-xl-0">
+              <div class="d-none d-sm-block">
+                <h2 class="h6 text-gray-400 mb-0">Fast Gas Price</h2>
+                <h3 class="fw-extrabold mb-2" style="color:#3BC14A"><span class="fastGas">ZZZ</span> &nbsp;gwei</h3>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- block utilization -->
+    <div class="col-12 col-sm-6 col-xl-3 mb-4">
+      <div class="card border-0 shadow">
+        <div class="card-body">
+          <div class="row d-block d-xl-flex align-items-center">
+            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+              <div class="icon-shape icon-shape-primary rounded me-4 me-sm-0">
+                <img class="navbar-brand-dark" src="./assets/img/icons/lightning.png" alt="Volt logo" />              </div>
+              <div class="d-sm-none">
+                <h2 class="h5">Block Gas Utilization</h2>
+                <h3 class="fw-extrabold mb-1" style="color:rgb(153, 102, 255)"><span class="blockGasUtilization">XX%</span></h3>
+              </div>
+            </div>
+            <div class="col-12 col-xl-7 px-xl-0">
+              <div class="d-none d-sm-block">
+                <h2 class="h6 text-gray-400 mb-0">Block Gas Util.</h2>
+                <h3 class="fw-extrabold mb-2" style="color:rgb(153, 102, 255)"><span class="blockGasUtilization">XX%</span></h3>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" id="notifications-page">
+    <!-- Form to request notifications -->
+    <div class="col-12 col-xl-12">
+      <div class="card card-body border-0 shadow mb-4">
+        <h2 class="h5 mb-4">Notification Configuration</h2>
+        <form name="notification-form">
+          <div class="row">
+            <!-- select gas category -->
+            <div class="col-md-4 mb-3">
+              <div>
+                <label for="gas-category">Gas Category</label>
+                <select name="gas-category" id="gas-category" class="form-control" type="text" required>
+                  <option value="slow">Slow</option>
+                  <option selected value="moderate">Moderate</option>
+                  <option value="fast">Fast</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- input gas price -->
+            <div class="col-md-4 mb-3">
+              <label for="gas-price">Gas Price (gwei)</label>
+              <input type="number" name="gas-price" id="gas-price" class="form-control" min="0" required>
+            </div>
+
+            <!-- submit -->
+            <div class="col-md-4 mb-3">
+              <label for="button-submit-form">&nbsp;</label>
+              <button id="button-submit-form" type="button" class="btn btn-success form-control" onclick="configureNotifications()">Set Notification</button>
+            </div>
+          </div>
+        </form>
+        <hr>
+        <div class="row">
+          <!-- cancel notifications -->
+          <div class="col-12 col-xl-8">
+            <button class="btn btn-danger" onclick="cancelNotifications()">Cancel Notifications</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- Core -->
+<script src="./vendor/@popperjs/core/dist/umd/popper.min.js"></script>
+<script src="./vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- Moment JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+
+<!-- Volt JS -->
+<script src="./assets/js/volt.js"></script>
+
+<!-- line graph -->
+<script src="./assets/js/linegraph.js"></script>
+<script src="./assets/js/update.js"></script>
+
+<!-- page initialization -->
+<script>
+  showPage('statistics');
+</script>
+
+
+</body>
+
+</html>
